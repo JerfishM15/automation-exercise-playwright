@@ -1,0 +1,63 @@
+name: CI - Playwright
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: playwright-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    strategy:
+      # Cambia navegadores/Node si lo necesitas
+      matrix:
+        node: [20]
+        browser: [chromium, firefox, webkit]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      # Instalar navegadores y librerías del sistema
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      # variables de entorno 
+      - name: Set env
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }} # Define tu URL base en los secretos del repo
+        run: echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
+
+      # Si necesitas secretos, usa: ${{ secrets.MI_SECRETO }}
+
+      - name: Run tests (${{ matrix.browser }})
+        run: npx playwright test --reporter=list,junit,html
+
+      # Publica artefactos (reportes, screenshots, videos, traces)
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-${{ matrix.browser }}
+          path: |
+            playwright-report/**
+            test-results/**
+          if-no-files-found: ignore
