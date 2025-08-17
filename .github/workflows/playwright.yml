@@ -2,9 +2,9 @@ name: CI - Playwright
 
 on:
   push:
-    branches: [ "main, Master" ]
+    branches: [ "main, master" ]
   pull_request:
-  branches: [ "main, Master" ]
+  branches: [ "main, master" ]
 
 
 jobs:
