@@ -19,7 +19,10 @@ export default defineConfig({
   use: {
 
     browserName : 'chromium',
-
+    baseURL: process.env.BASE_URL || 'https://automationexercise.com',
+    trace: 'on-first-retry',
+    video: 'retain-on-failure',
+    screenshot: 'only-on-failure',
     headless: false
 
 

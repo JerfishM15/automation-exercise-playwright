@@ -2,26 +2,15 @@ name: CI - Playwright
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main, Master" ]
   pull_request:
+  branches: [ "main, Master" ]
 
-permissions:
-  contents: read
-
-concurrency:
-  group: playwright-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   e2e:
     runs-on: ubuntu-latest
     timeout-minutes: 25
-
-    strategy:
-      # Cambia navegadores/Node si lo necesitas
-      matrix:
-        node: [20]
-        browser: [chromium, firefox, webkit]
 
     steps:
       - name: Checkout
@@ -40,16 +29,14 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      # variables de entorno 
-      - name: Set env
+      # Ejecutar pruebas de Playwright
+
+      - name: Run Playwright Tests
+        run: npx playwright test --reporter=html --reporter=dot --output=playwright-report --trace on-first-retry --config=playwright.config.js
         env:
-          BASE_URL: ${{ secrets.BASE_URL }} # Define tu URL base en los secretos del repo
-        run: echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
+          # Define tus variables de entorno necesarias aquí
+          BASE_URL: ${{ secrets.BASE_URL }} # Asegúrate de definir BASE_URL en los secretos del repo
 
-      # Si necesitas secretos, usa: ${{ secrets.MI_SECRETO }}
-
-      - name: Run tests (${{ matrix.browser }})
-        run: npx playwright test --reporter=list,junit,html
 
       # Publica artefactos (reportes, screenshots, videos, traces)
       - name: Upload artifacts
