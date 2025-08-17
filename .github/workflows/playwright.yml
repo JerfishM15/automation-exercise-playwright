@@ -35,7 +35,7 @@ jobs:
       # Ejecutar pruebas de Playwright
 
       - name: Run Playwright Tests
-        run: npx playwright test --reporter=html --reporter=dot --output=playwright-report --trace on-first-retry --config=playwright.config.js
+        run: npx playwright test 
         # env:
         #   BASE_URL: ${{ secrets.BASE_URL }} # Uncomment and set if needed
 
@@ -49,4 +49,4 @@ jobs:
           path: |
             playwright-report/**
             test-results/**
-          # if-no-files-found: ignore
+          if-no-files-found: ignore
