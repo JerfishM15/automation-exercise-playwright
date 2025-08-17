@@ -49,4 +49,4 @@ jobs:
           path: |
             playwright-report/**
             test-results/**
-          if-no-files-found: ignore
+          # if-no-files-found: ignore
