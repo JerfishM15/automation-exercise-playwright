@@ -4,13 +4,16 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-  branches: [ "main" ]
+    branches: [ "main" ]
 
 
 jobs:
   e2e:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    strategy:
+      matrix:
+        node: [18.x]
 
     steps:
       - name: Checkout
@@ -33,9 +36,8 @@ jobs:
 
       - name: Run Playwright Tests
         run: npx playwright test --reporter=html --reporter=dot --output=playwright-report --trace on-first-retry --config=playwright.config.js
-        env:
-          # Define tus variables de entorno necesarias aquí
-          BASE_URL: ${{ secrets.BASE_URL }} # Asegúrate de definir BASE_URL en los secretos del repo
+        # env:
+        #   BASE_URL: ${{ secrets.BASE_URL }} # Uncomment and set if needed
 
 
       # Publica artefactos (reportes, screenshots, videos, traces)
@@ -43,7 +45,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-${{ matrix.browser }}
+          name: playwright-report
           path: |
             playwright-report/**
             test-results/**
