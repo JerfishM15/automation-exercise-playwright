@@ -2,30 +2,30 @@
 
 This is an automation project using Playwright
 
-## Instalación del proyecto
+## Project Installation
 
-- Descargar e instalar [node.js] (https://nodejs.org/en)
+- Download and install [node.js] (https://nodejs.org/en)
 
-- Ejecutar el comando `npm install` en la terminal del proyecto para instalar todas las dependencias requeridas.
+- Run de command `npm install` in the project terminal to install all required dependencies.
 
-## Ejecución del proyecto
+## Project Execution
 
-- Ejecutar el comando `npm run test` para la ejecucion de todos los test cases creados.
+- Run the command `npm run test` to execute all created test cases.
 
-- Ejecutar el comando `npm run test:ui` para abrir el **UI Test Runner** de Playwright y de depurar pruebas de forma interactiva.
+- Run the command `npm run test:ui` to open Playwright’s **UI Test Runner** and debug tests interactively.
 
-- Ejecutar el comando `npm run test:smoke` para ejecutar únicamente los tests marcados con la etiqueta **@smoke**.
+- Run the command `npm run test:smoke` to execute only the tests tagged with **@smoke**.
 
-- Ejecutar el comando `npm run test:reg` para ejecutar únicamente los tests marcados con la etiqueta **@regression**.
+- Run the command `npm run test:reg` to execute only the tests tagged with **@regression**.
 
-- Ejecutar el comando `npm run test:grep --<expresión>` para ejecutar los tests que coincidan con el patron indicado en la expresión.
+- Run the command `npm run test:grep --<expresión>` to execute the tests that match the pattern specified in the expression.
 
-- Ejecutar el comando `npm run allure:report` para generar el reporte HTML de Allure a partir de los resultados en allure-results.
+- Run the command `npm run allure:report` to generate the Allure HTML report from the results in the allure-results folder.
 
-- Ejecutar el comando `npm run allure:open` para abrir en el navegador el reporte HTML generado en allure-report.
+- Run the command `npm run allure:open` to open in the browser the HTML report generated in the allure-report folder.
 
-- Ejecutar el comando `npm run test:allure` para ejecutar Pipeline completo: ejecuta los tests → genera el reporte Allure → abre el reporte en el navegador.
+- Run the command `npm run test:allure` to execute the full pipeline: run the tests → generate the Allure report → open the report in the browser.
 
-- Ejecutar el comando `npm run allure:clean` para limpiar la carpeta de caché .allure usada por Allure para almacenar histórico.
+- Run the command `npm run allure:clean` to clean the .allure cache folder used by Allure to store historical data.
 
-- Ejecutar el comando `npm run ci:allure` para ejecutar las pruebas y generar el reporte de Allure sin abrirlo (pensado para CI/CD).
+- Run the command `npm run ci:allure` to execute the tests and generate the Allure report without opening it (intended for CI/CD).
