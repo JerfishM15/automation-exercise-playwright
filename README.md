@@ -16,7 +16,7 @@ This is an automation project using Playwright
 
 - Ejecutar el comando `npm run test:smoke` para ejecutar únicamente los tests marcados con la etiqueta **@smoke**.
 
-- Ejecutar el comando `npm run test:reg` para ejecutar únicamente los tests marcados con al etiqueta **@regression**.
+- Ejecutar el comando `npm run test:reg` para ejecutar únicamente los tests marcados con la etiqueta **@regression**.
 
 - Ejecutar el comando `npm run test:grep --<expresión>` para ejecutar los tests que coincidan con el patron indicado en la expresión.
 
